@@ -30,7 +30,8 @@ public class Role implements Serializable {
   @UpdateTimestamp
   private Instant updatedAt;
 
-  @ManyToMany private Collection<User> users;
+  @ManyToMany(mappedBy = "userRoles")
+  private Collection<User> users;
 
   public String getName() {
     return name;
