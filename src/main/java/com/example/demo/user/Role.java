@@ -5,24 +5,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Collection;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
 
-  private static final long serialVersionUID = -1677236290412103042L;
+  @Serial private static final long serialVersionUID = -1677236290412103042L;
 
   @Id
   @Column(name = "name")
   private String name;
 
   @Column(name = "created_at")
+  @CreationTimestamp
   private Instant createdAt;
 
   @Column(name = "updated_at", nullable = false)
+  @UpdateTimestamp
   private Instant updatedAt;
 
   @ManyToMany private Collection<User> users;
