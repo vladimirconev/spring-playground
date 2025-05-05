@@ -24,7 +24,7 @@
 	<properties>
 		<java.version>24</java.version>
 		<fmt-maven-plugin.goal>check</fmt-maven-plugin.goal>
-		<fmt-maven-plugin.version>2.25</fmt-maven-plugin.version>
+		<fmt-maven-plugin.version>2.27</fmt-maven-plugin.version>
 		<sprindoc-openapi.version>2.8.6</sprindoc-openapi.version>
 		<jjwt.version>0.12.6</jjwt.version>
 	</properties>
