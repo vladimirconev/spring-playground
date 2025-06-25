@@ -49,6 +49,7 @@ class UserRestController {
       })
   @PostMapping
   public ResponseEntity<UserResponse> create(@RequestBody @Valid final UserRequest userRequest) {
+    logger.debug("Creating a user");
     var userResponse =
         userService.create(userRequest.email(), userRequest.password(), userRequest.roles());
     return ResponseEntity.created(URI.create("/api/v1/users/%s".formatted(userResponse.id())))
