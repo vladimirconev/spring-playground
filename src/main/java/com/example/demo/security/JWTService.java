@@ -2,11 +2,13 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,12 @@ public class JWTService {
   private final String tokenIssuer;
   private final SecretKey secretKey;
 
-  public JWTService(final @Value("${jwt.issuer}") String tokenIssuer) {
+  public JWTService(
+      final @Value("${jwt.issuer}") String tokenIssuer,
+      final @Value("${jwt.sign.key}") CharSequence signingKey) {
     this.tokenIssuer = tokenIssuer;
-    this.secretKey = Jwts.SIG.HS512.key().build();
+    this.secretKey =
+        new SecretKeySpec(signingKey.toString().getBytes(StandardCharsets.UTF_8), "HmacSHA512");
   }
 
   public String generateToken(
