@@ -1,5 +1,6 @@
 package com.example.demo.exception;
 
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.NoSuchElementException;
@@ -72,6 +73,13 @@ public class GlobalExceptionHandler {
         httpServletRequest.getMethod(),
         throwable.getClass().getSimpleName(),
         Instant.now());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(SignatureException.class)
+  protected ResponseEntity<ErrorResponse> handleSignatureException(
+      final SignatureException ex, final WebRequest webRequest) {
+    return handleException(ex, HttpStatus.FORBIDDEN, webRequest, ex.getMessage());
   }
 
   @ResponseBody

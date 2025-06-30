@@ -3,7 +3,6 @@ package com.example.demo.security;
 import com.example.demo.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -46,8 +45,7 @@ public class LoginAuthFilter extends UsernamePasswordAuthenticationFilter {
       HttpServletRequest request,
       HttpServletResponse response,
       FilterChain chain,
-      Authentication authResult)
-      throws IOException, ServletException {
+      Authentication authResult) {
     final String username = authResult.getName();
     var user = userService.findByUsername(username);
 

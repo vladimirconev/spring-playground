@@ -82,7 +82,7 @@ class UserRestController {
             description = "Service temporally unavailable",
             content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
       })
-  @PreAuthorize("hasAnyAuthority('ADMIN','CONSUMER')")
+  @PreAuthorize("hasAnyAuthority('ADMIN','CUSTOMER')")
   @GetMapping("/{id}")
   public ResponseEntity<UserResponse> findById(@PathVariable("id") UUID id) {
     var userResponse = userService.findById(id);
