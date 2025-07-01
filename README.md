@@ -37,4 +37,19 @@ Check up Swagger UI on: `http://localhost:8080/swagger-ui.html`.
 
 Obtaining JWT via HTTP POST `/api/v1/login`. 
 
+Generate new JWT signing key using python (v3.12.x):
+````
+import os
+import base64
+
+# Generate a 512-bit (64-byte) key for HmacSHA512
+secret_key_bytes = os.urandom(64) # 64 bytes * 8 bits/byte = 512 bits
+
+# Encode the key to Base64 URL-safe for easy storage/use in configuration
+secret_key_b64_urlsafe = base64.urlsafe_b64encode(secret_key_bytes).decode('utf-8')
+
+print(f"Generated HmacSHA512 (HS512) Key (Base64 URL-safe):")
+print(secret_key_b64_urlsafe)
+````
+
 Happy Coding!!! 
