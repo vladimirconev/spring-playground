@@ -2,41 +2,32 @@
 <configuration>
 
     <property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %-5level - %X{userId} - %C{1} - %msg%n"/>
-    <property name="APP_LOG_ROOT" value="${user.home}/example/demo/logs"/> <!-- location to the log file -->
+    <property name="APP_LOG_ROOT" value="${user.home}/example/demo/logs"/>
 
-    <appender name="Console"
-              class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
             <Pattern>${LOG_PATTERN}</Pattern>
-        </layout>
+        </encoder>
     </appender>
 
-    <appender name="RollingFile"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${APP_LOG_ROOT}/example_demo.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+
+        <encoder>
             <Pattern>${LOG_PATTERN}</Pattern>
         </encoder>
 
-        <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- rollover daily and when the file reaches 10 MegaBytes -->
-            <fileNamePattern>${APP_LOG_ROOT}/archived/example_demo-%d{yyyy-MM-dd}.%i.log.gz
-            </fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- keep 7 days worth of history -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${APP_LOG_ROOT}/archived/example_demo-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
 
-    <!-- LOG everything at INFO level -->
     <root level="info">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
-
 
     <logger name="com.example.demo" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
