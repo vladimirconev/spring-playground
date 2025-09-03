@@ -104,7 +104,10 @@ public class SecurityConfiguration {
                         PathPatternRequestMatcher.withDefaults()
                             .matcher(HttpMethod.GET, "/swagger-ui/**"),
                         PathPatternRequestMatcher.withDefaults()
-                            .matcher(HttpMethod.GET, "/swagger-ui.html"))
+                            .matcher(HttpMethod.GET, "/swagger-ui.html"),
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/info"),
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/status"),
+                        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/health"))
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/users")
                     .permitAll()
