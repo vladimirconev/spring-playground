@@ -19,7 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -99,9 +99,12 @@ public class SecurityConfiguration {
             authz ->
                 authz
                     .requestMatchers(
-                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/v3/api-docs/**"),
-                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/swagger-ui/**"),
-                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/swagger-ui.html"))
+                        PathPatternRequestMatcher.withDefaults()
+                            .matcher(HttpMethod.GET, "/v3/api-docs/**"),
+                        PathPatternRequestMatcher.withDefaults()
+                            .matcher(HttpMethod.GET, "/swagger-ui/**"),
+                        PathPatternRequestMatcher.withDefaults()
+                            .matcher(HttpMethod.GET, "/swagger-ui.html"))
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/users")
                     .permitAll()
@@ -116,7 +119,8 @@ public class SecurityConfiguration {
         .logout(
             httpSecurityLogoutConfigurer ->
                 httpSecurityLogoutConfigurer
-                    .logoutRequestMatcher(AntPathRequestMatcher.antMatcher("/api/v1/logout"))
+                    .logoutRequestMatcher(
+                        PathPatternRequestMatcher.withDefaults().matcher("/api/v1/logout"))
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
                     .addLogoutHandler(

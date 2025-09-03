@@ -1,7 +1,6 @@
 package com.example.demo.user;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails {
 
   private static final long serialVersionUID = 2440449949656228938L;
 

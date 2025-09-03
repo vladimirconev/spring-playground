@@ -16,7 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 public class LoginAuthFilter extends UsernamePasswordAuthenticationFilter {
@@ -36,7 +36,7 @@ public class LoginAuthFilter extends UsernamePasswordAuthenticationFilter {
     this.jwtService = jwtService;
     this.userService = userService;
     this.requireAuthenticationRequestMatcher =
-        AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/login");
+        PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/api/v1/login");
     this.objectMapper = objectMapper;
   }
 
