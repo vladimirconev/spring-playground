@@ -148,6 +148,6 @@ public class User implements UserDetails {
 
   @Override
   public int hashCode() {
-    return getClass().hashCode();
+    return Objects.hash(this.getId());
   }
 }

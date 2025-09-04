@@ -9,6 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -76,6 +77,6 @@ public class Role implements Serializable {
 
   @Override
   public int hashCode() {
-    return getClass().hashCode();
+    return Objects.hashCode(this.getName());
   }
 }

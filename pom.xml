@@ -27,6 +27,7 @@
 		<fmt-maven-plugin.version>2.27</fmt-maven-plugin.version>
 		<sprindoc-openapi.version>2.8.6</sprindoc-openapi.version>
 		<jjwt.version>0.13.0</jjwt.version>
+        <equalsverifier.version>4.1</equalsverifier.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -131,6 +132,13 @@
 			<artifactId>postgresql</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <!-- EqualsVerifier -->
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>${equalsverifier.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
