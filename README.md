@@ -2,7 +2,7 @@
 Sample Spring-boot application using spring security alongside JWT. Serves as playground on trying new features in Spring ecosystem and/or Java. 
 
 # Pre-requisites 
-- JDK 24 + 
+- JDK 25 
 - Maven 
 - Docker / Docker Desktop
 
@@ -24,9 +24,9 @@ mvn clean verify -T 4C
 
 To format code:
 ````
-mvn com.spotify.fmt:fmt-maven-plugin:format
+mvn spotless:apply
 ````
-Details can be found on https://github.com/spotify/fmt-maven-plugin. 
+Details can be found on https://github.com/diffplug/spotless. 
 
 Check up Swagger UI on: `http://localhost:8080/swagger-ui.html`.
 
