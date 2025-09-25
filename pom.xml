@@ -23,7 +23,7 @@
 	
 	<properties>
 		<java.version>25</java.version>
-        <diffplug-spotless.version>2.46.1</diffplug-spotless.version>
+        <diffplug-spotless.version>3.0.0</diffplug-spotless.version>
         <diffplug-spotless.goal>check</diffplug-spotless.goal>
         <google-java-format.version>1.28.0</google-java-format.version>
 		<sprindoc-openapi.version>2.8.6</sprindoc-openapi.version>
@@ -140,6 +140,11 @@
             <version>${equalsverifier.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -207,6 +212,24 @@
                 <artifactId>git-commit-id-maven-plugin</artifactId>
                 <configuration>
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine/>
                 </configuration>
             </plugin>
 		</plugins>
