@@ -84,7 +84,7 @@ class UserRestController {
       })
   @PreAuthorize("hasAnyAuthority('ADMIN','CUSTOMER')")
   @GetMapping("/{id}")
-  public ResponseEntity<UserResponse> findById(@PathVariable("id") UUID id) {
+  public ResponseEntity<UserResponse> findById(@PathVariable UUID id) {
     var userResponse = userService.findById(id);
     return ResponseEntity.ok(userResponse);
   }
@@ -114,7 +114,7 @@ class UserRestController {
       })
   @DeleteMapping("/{id}")
   @PreAuthorize("hasAuthority('ADMIN')")
-  public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id) {
+  public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
     userService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
