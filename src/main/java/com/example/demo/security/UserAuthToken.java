@@ -6,6 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class UserAuthToken extends AbstractAuthenticationToken {
 
+  /** */
+  private static final long serialVersionUID = -706442893816570435L;
+
   private final String username;
   private final String password;
 
