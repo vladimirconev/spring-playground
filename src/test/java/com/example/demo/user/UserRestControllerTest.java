@@ -34,7 +34,7 @@ import org.testcontainers.utility.DockerImageName;
 @WithMockUser
 @Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_CLASS)
 @Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_CLASS)
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 class UserRestControllerTest {
   @Container
   static PostgreSQLContainer<?> postgres =

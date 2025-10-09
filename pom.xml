@@ -12,7 +12,7 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
-	<description>secure endpoints </description>
+	<description>secure endpoints</description>
 	
 	<developers>
 		<developer>
@@ -25,7 +25,7 @@
 		<java.version>25</java.version>
         <diffplug-spotless.version>3.0.0</diffplug-spotless.version>
         <diffplug-spotless.goal>check</diffplug-spotless.goal>
-        <google-java-format.version>1.28.0</google-java-format.version>
+        <google-java-format.version>1.29.0</google-java-format.version>
 		<sprindoc-openapi.version>2.8.6</sprindoc-openapi.version>
 		<jjwt.version>0.13.0</jjwt.version>
         <equalsverifier.version>4.1.1</equalsverifier.version>
@@ -183,30 +183,6 @@
                     </java>
                 </configuration>
             </plugin>
-            <!-- upon moving to JDK 25 issues spotted with maven build
-			<plugin>
-				<groupId>com.spotify.fmt</groupId>
-				<artifactId>fmt-maven-plugin</artifactId>
-				<version>${fmt-maven-plugin.version}</version>
-				<configuration>
-					<sourceDirectory>src/main/java</sourceDirectory>
-					<testSourceDirectory>src/test/java</testSourceDirectory>
-					<verbose>true</verbose>
-					<filesNamePattern>.*\.java</filesNamePattern>
-					<skip>false</skip>
-					<skipSortingImports>false</skipSortingImports>
-					<style>google</style>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>${fmt-maven-plugin.goal}</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
