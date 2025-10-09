@@ -1,8 +1,7 @@
 package com.example.demo.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.*;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
@@ -15,8 +14,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
-@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
+@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_CLASS)
+@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_CLASS)
 @Testcontainers(disabledWithoutDocker = true)
 class UserRepositoryTest {
 
