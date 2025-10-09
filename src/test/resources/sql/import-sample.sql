@@ -1,3 +1,6 @@
+ INSERT INTO roles (name) VALUES ('CUSTOMER') ON CONFLICT(name) DO NOTHING;
+ INSERT INTO roles (name) VALUES ('ADMIN') ON CONFLICT(name) DO NOTHING;
+
 INSERT INTO users (id, email, password, salt) VALUES
     ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'john.doe@acme.com', 'change_me','salt_val');
 

@@ -14,8 +14,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_CLASS)
-@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_CLASS)
+@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
 @Testcontainers(disabledWithoutDocker = true)
 class UserRepositoryTest {
 

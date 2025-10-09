@@ -32,8 +32,8 @@ import org.testcontainers.utility.DockerImageName;
 @AutoConfigureMockMvc
 @SpringBootTest
 @WithMockUser
-@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_CLASS)
-@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_CLASS)
+@Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
 @Testcontainers(disabledWithoutDocker = true)
 class UserRestControllerTest {
   @Container
