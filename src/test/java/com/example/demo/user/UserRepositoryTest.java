@@ -3,19 +3,22 @@ package com.example.demo.user;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.*;
 
+import com.example.demo.TestcontainersConfiguration;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@DataJpaTest
+@DataJpaTest(properties = {"spring.test.database.replace=NONE"})
 @ActiveProfiles("test")
 @Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
+@Import(TestcontainersConfiguration.class)
 @Testcontainers(disabledWithoutDocker = true)
 class UserRepositoryTest {
 
@@ -35,7 +38,7 @@ class UserRepositoryTest {
 
   @Test
   void countCorrectNumberOfRoles() {
-    final Integer rolesCount = roleRepository.findAll().size();
+    final int rolesCount = roleRepository.findAll().size();
 
     assertEquals(2, rolesCount);
   }

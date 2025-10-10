@@ -6,27 +6,23 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.example.demo.TestcontainersConfiguration;
 import com.example.demo.security.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
@@ -35,30 +31,12 @@ import org.testcontainers.utility.DockerImageName;
 @Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
 @Testcontainers(disabledWithoutDocker = true)
+@Import(TestcontainersConfiguration.class)
 class UserRestControllerTest {
-  @Container
-  static PostgreSQLContainer<?> postgres =
-      new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 
   @Autowired protected MockMvc mockMvc;
 
   @Autowired protected ObjectMapper objectMapper;
-
-  @BeforeAll
-  static void setup() {
-    postgres.start();
-  }
-
-  @AfterAll
-  static void tearDown() {
-    postgres.close();
-    assertThat(postgres.isRunning()).isFalse();
-  }
-
-  @BeforeEach
-  void testIsContainerRunning() {
-    assertThat(postgres.isRunning()).isTrue();
-  }
 
   @Test
   void createUser() throws Exception {
