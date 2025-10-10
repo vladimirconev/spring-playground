@@ -14,7 +14,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@DataJpaTest(properties = {"spring.test.database.replace=NONE"},showSql = false)
+@DataJpaTest(
+    properties = {"spring.test.database.replace=NONE"},
+    showSql = false)
 @ActiveProfiles("test")
 @Sql(scripts = "classpath:sql/import-sample.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "classpath:sql/clean-up.sql", executionPhase = AFTER_TEST_METHOD)
