@@ -31,9 +31,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         Optional.ofNullable(authentication.getCredentials()).map(Object::toString).orElse("");
     var user = userService.findByUsername(username);
     if (user == null) {
-      logger.debug(
-          "Cannot authenticate non-existing user {} proceeding with B2C web shop check ups.",
-          username);
+      logger.debug("Cannot authenticate non-existing user {}.", username);
       throw new BadCredentialsException("Non-existing user");
     }
     if (!Objects.equals(user.getPassword(), BCrypt.hashpw(password, user.getSalt()))) {
