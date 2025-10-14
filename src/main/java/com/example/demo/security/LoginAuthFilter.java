@@ -6,8 +6,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Collections;
+import java.util.Date;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -48,13 +48,14 @@ public class LoginAuthFilter extends UsernamePasswordAuthenticationFilter {
       Authentication authResult) {
     final String username = authResult.getName();
     var user = userService.findByUsername(username);
-
+    var nowMillis = System.currentTimeMillis();
+    var expirationMillis = 4L * 3600000L; // 4 hours
     var token =
         jwtService.generateToken(
             "AUTH_TOKEN",
             Collections.singletonMap("username", username),
-            Instant.now().plusMillis(4L * 3600000), // 4 hours
-            Instant.now());
+            new Date(nowMillis + expirationMillis), // 4 hours
+            new Date(nowMillis));
     var defaultCredentialsAuthToken =
         new CredentialsAuthToken(user.getEmail(), user.getId(), token, user.getAuthorities());
     response.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);

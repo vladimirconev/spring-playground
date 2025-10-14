@@ -63,7 +63,7 @@ public class RequestAuthenticationFilter extends BasicAuthenticationFilter {
     }
     var jwt = token.replace("Bearer ", "");
     var payloads = jwt.split("\\.");
-    if (payloads.length != 3) {
+    if (payloads.length != 3 && jwtService.isExpired(jwt)) {
       return null;
     }
 

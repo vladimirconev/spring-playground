@@ -3,7 +3,6 @@ package com.example.demo.security;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -29,15 +28,15 @@ public class JWTService {
   public String generateToken(
       final String subject,
       final Map<String, Object> claims,
-      final Instant expiration,
-      final Instant issuedAt) {
+      final Date expiration,
+      final Date issuedAt) {
     return Jwts.builder()
         .claims(Jwts.claims().subject(subject).add(claims).build())
         .issuer(tokenIssuer)
         .id(UUID.randomUUID().toString())
-        .issuedAt(Date.from(issuedAt))
+        .issuedAt(issuedAt)
         .signWith(secretKey, Jwts.SIG.HS512)
-        .expiration(Date.from(expiration))
+        .expiration((expiration))
         .compact();
   }
 
