@@ -1,9 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.security.JWTService;
-import com.example.demo.security.LoginAuthFilter;
-import com.example.demo.security.RequestAuthenticationFilter;
-import com.example.demo.security.UserAuthenticationProvider;
+import com.example.demo.security.*;
 import com.example.demo.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
@@ -66,6 +63,7 @@ public class SecurityConfiguration {
         List.of(
             HttpHeaders.AUTHORIZATION,
             HttpHeaders.CONTENT_TYPE,
+            HttpHeaders.CONNECTION,
             HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS,
             HttpHeaders.CACHE_CONTROL));
     source.registerCorsConfiguration("/**", corsConfig.applyPermitDefaultValues());
@@ -120,7 +118,7 @@ public class SecurityConfiguration {
         .sessionManagement(
             httpSecuritySessionManagementConfigurer ->
                 httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
-                    SessionCreationPolicy.STATELESS))
+                    SessionCreationPolicy.IF_REQUIRED))
         .logout(
             httpSecurityLogoutConfigurer ->
                 httpSecurityLogoutConfigurer
